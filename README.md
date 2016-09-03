@@ -16,6 +16,10 @@ To run:
 
 To build:
 
-`browserify index.js -o bundle.js`
+`npm run bundle`.
 
 Then just include `bundle.js` in an HTML file.
+
+To live reload during development:
+
+`npm start`.
