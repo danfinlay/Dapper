@@ -4,7 +4,7 @@ const configureStore = require('./lib/store')
 const Root = require('./app/root.js')
 const Provider = require('react-redux').Provider
 const qp = require('query-parse')
-const params = qp.toObject(window.location.search)
+const params = qp.toObject(window.location.search.substr(1))
 
 var body = document.querySelector('body')
 const container = document.createElement('div')
@@ -29,9 +29,14 @@ const store = configureStore({
   editMode: true,
 })
 
+console.dir({ params })
 store.dispatch({
   type: 'PARAMS',
-  value: params,
+  value: {
+    abi: unescape(params.abi),
+    address: params.address,
+    name: params.name,
+  },
 })
 
 function startApp(){

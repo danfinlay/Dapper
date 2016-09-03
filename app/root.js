@@ -6,6 +6,7 @@ const connect = require('react-redux').connect
 const Header = require('./components/header')
 const GetMetaMask = require('./components/get-metamask')
 const DappInputForm = require('./dapp-input-form')
+const DappInterface = require('./dapp-interface')
 
 module.exports = connect(mapStateToProps)(AppRoot)
 
@@ -41,8 +42,9 @@ AppRoot.prototype.renderBody = function() {
   }
 
   if (editMode) {
-    return h(DappInputForm, { store: this.store })
+    return h(DappInputForm)
   }
 
+  return h(DappInterface)
   return h('Render dapp interface here.')
 }

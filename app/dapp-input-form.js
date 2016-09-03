@@ -29,21 +29,21 @@ DappInputForm.prototype.render = function () {
       h('.name', [
         h('input', {
           placeholder: 'Dapp Name',
-          value: name,
+          defaultValue: name,
         })
       ]),
 
       h('.address', [
         h('input', {
           placeholder: 'Dapp Address',
-          value: address,
+          defaultValue: address,
         })
       ]),
 
       h('.abi', [
         h('textarea', {
           placeholder: 'ABI (Application Binary Interface)',
-          value: abi,
+          defaultValue: abi,
         })
       ]),
 
@@ -53,8 +53,8 @@ DappInputForm.prototype.render = function () {
           const address = document.querySelector('.address input').value
           const abi = document.querySelector('.abi textarea').value
 
-          this.store.dispatch({
-            type: 'CREATE',
+          props.dispatch({
+            type: 'PARAMS',
             value: { name, address, abi },
           })
         },
