@@ -3,12 +3,20 @@ const Component = require('react').Component
 const h = require('react-hyperscript')
 const connect = require('react-redux').connect
 
+const Header = require('./components/header')
+const GetMetaMask = require('./components/get-metamask')
+const DappInputForm = require('./dapp-input-form')
+
 module.exports = connect(mapStateToProps)(AppRoot)
 
 function mapStateToProps (state) {
   return {
     view: state.currentView,
-    nonce: state.nonce,
+    web3Found: state.web3Found,
+    abi: state.abi,
+    address: state.address,
+    name: state.name,
+    editMode: state.editMode,
   }
 }
 
@@ -18,29 +26,23 @@ function AppRoot () {
 }
 
 AppRoot.prototype.render = function () {
-  const props = this.props
-
-  return (
-    h('.content', [
-      h('div', {
-        style: {
-          background: 'grey',
-        },
-      }, [
-        h('h1', `Welcome ${props.view}`),
-        h('h2', `The count is ${props.nonce}`),
-
-        h('button', {
-          onClick: () => this.incrementNonce(),
-        }, 'COUNT HIGHER!'),
-
-      ])
-    ])
-  )
+  return h('.content', [
+    h(Header),
+    this.renderBody(),
+  ])
 }
 
-AppRoot.prototype.incrementNonce = function() {
-  this.props.dispatch({
-    type: 'INCREMENT_NONCE'
-  })
+AppRoot.prototype.renderBody = function() {
+  const props = this.props
+  const { web3Found, abi, address, name, editMode } = props
+
+  if (!web3Found) {
+    return h(GetMetaMask)
+  }
+
+  if (editMode) {
+    return h(DappInputForm, { store: this.store })
+  }
+
+  return h('Render dapp interface here.')
 }
