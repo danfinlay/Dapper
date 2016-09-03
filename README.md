@@ -13,7 +13,8 @@ To Do:
 - [x] Generate reusable URL from dapp UI description.
 - [ ] Use reusable URL to restore dapp UI.
 - [ ] Let the UI make real requests to the contract.
-- [ ] Make the UI look good
+- [ ] Add input type validations.
+- [ ] Make the UI look good.
 
 To run:
 
